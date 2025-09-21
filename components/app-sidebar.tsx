@@ -55,12 +55,12 @@ const adminNavigation = [
 export function AppSidebar() {
   return (
     <Sidebar>
-        <SidebarHeader />
-        <SidebarContent>
+        <SidebarHeader>
             {/* Organization Switcher */}
-            <div className="px-2 mb-4">
-                <OrganizationSwitcher />
-            </div>
+            <OrganizationSwitcher />
+        </SidebarHeader>
+
+        <SidebarContent>
             
             <SidebarGroup>
                 <SidebarGroupLabel>Application</SidebarGroupLabel>

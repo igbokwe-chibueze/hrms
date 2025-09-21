@@ -1,10 +1,11 @@
 // components/header.tsx
 
-import { Bell, LogOut, Menu, Search, Settings, User } from "lucide-react"
+import { Bell, LogOut, Search, Settings, User } from "lucide-react"
 import { Button } from "./ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { getCurrentUser } from "@/lib/dummy-data"
+import { SidebarTrigger } from "./ui/sidebar"
 
 
 export const Header = () => {
@@ -15,10 +16,9 @@ export const Header = () => {
         <header className="bg-white shadow-sm border-b">
             <div className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center">
-                    <Button variant="ghost" size="sm" className="md:hidden">
-                        <Menu className="h-5 w-5" />
-                    </Button>
-                    <div className="hidden md:block ml-4 md:ml-0">
+                    <SidebarTrigger/>
+
+                    <div className="hidden md:block ml-4">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                             <input

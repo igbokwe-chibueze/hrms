@@ -22,8 +22,8 @@ import {
 } from "@/components/ui/command"
 import { ChevronsUpDown, PlusCircle, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 export const OrganizationSwitcher = () => {
   const [open, setOpen] = useState(false)
@@ -41,21 +41,23 @@ export const OrganizationSwitcher = () => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[250px] justify-between"
+          className="justify-between"
         >
           <div className="flex items-center">
             {currentOrganization.logo ? (
-              <Image
-                src={currentOrganization.logo}
-                alt={currentOrganization.name}
-                width={20}
-                height={20}
-                className="mr-2"
-              />
+              <Avatar>
+                <AvatarImage src={currentOrganization.logo} />
+                <AvatarFallback>
+                  {currentOrganization.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
             ) : (
               <PlusCircle className="mr-2 h-4 w-4" />
             )}
-            <span className="truncate">
+            <span className="truncate ml-2">
               {currentOrganization.name}
             </span>
           </div>
@@ -79,13 +81,15 @@ export const OrganizationSwitcher = () => {
                 >
                   <div className="flex items-center">
                     {org.logo ? (
-                      <Image
-                        src={org.logo}
-                        alt={org.name}
-                        width={20}
-                        height={20}
-                        className="mr-2"
-                      />
+                      <Avatar>
+                        <AvatarImage src={org.logo} />
+                        <AvatarFallback>
+                          {org.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </AvatarFallback>
+                      </Avatar>
                     ) : (
                       <PlusCircle className="mr-2 h-4 w-4" />
                     )}
