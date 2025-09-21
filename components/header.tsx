@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { getCurrentUser } from "@/lib/dummy-data"
 import { SidebarTrigger } from "./ui/sidebar"
+import { Badge } from "./ui/badge"
 
 
 export const Header = () => {
@@ -52,7 +53,11 @@ export const Header = () => {
                         <DropdownMenuContent className="w-56" align="end" forceMount>
                             <DropdownMenuLabel className="font-normal">
                                 <div className="flex flex-col space-y-1">
-                                    <p className="text-sm font-medium leading-none">{CURRENT_USER.name}</p>
+                                    <div className=" flex items-center space-x-2">
+                                        <p className="text-sm font-medium leading-none">{CURRENT_USER.name}</p>
+                                        <Badge>{CURRENT_USER.role}</Badge>
+                                    </div>
+                                    <p className="text-xs leading-none text-muted-foreground">{CURRENT_USER.email}</p>
                                     <p className="text-xs leading-none text-muted-foreground">{CURRENT_USER.personalEmail}</p>
                                 </div>
                             </DropdownMenuLabel>

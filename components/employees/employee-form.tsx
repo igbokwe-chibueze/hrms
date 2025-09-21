@@ -16,8 +16,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon, Plus, X } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
-import { DUMMY_ORGANIZATIONS, DUMMY_ROLES } from "@/lib/dummy-data"
+import { DUMMY_ORGANIZATIONS } from "@/lib/dummy-data"
 import type { Employee, EmergencyContact } from "@/lib/types"
+import { DEFAULT_ROLES } from "@/lib/permissions"
 
 const CURRENT_ORGANIZATION = DUMMY_ORGANIZATIONS[0]
 
@@ -42,7 +43,7 @@ export function EmployeeForm({ open, onOpenChange, employee, onSave }: EmployeeF
     employeeId: "",
     jobTitle: "",
     department: "",
-    roleId: DUMMY_ROLES[0]?.id || "",
+    roleId: DEFAULT_ROLES[0]?.id || "",
     employmentType: "full-time" as Employee["employmentType"],
     workLocation: "on-site" as Employee["workLocation"],
     startDate: new Date(),
@@ -82,7 +83,7 @@ export function EmployeeForm({ open, onOpenChange, employee, onSave }: EmployeeF
     } else {
       setFormData((prev) => ({
         ...prev,
-        roleId: DUMMY_ROLES[0]?.id || "",
+        roleId: DEFAULT_ROLES[0]?.id || "",
         employmentType: "full-time",
         workLocation: "on-site",
         startDate: new Date(),
@@ -218,11 +219,16 @@ export function EmployeeForm({ open, onOpenChange, employee, onSave }: EmployeeF
                       <SelectValue placeholder="Select role" />
                     </SelectTrigger>
                     <SelectContent>
-                      {DUMMY_ROLES.map((role) => (
+                      {DEFAULT_ROLES.map((role) => (
                         <SelectItem key={role.id} value={role.id}>
                           {role.name}
                         </SelectItem>
                       ))}
+                      {/* {DEFAULT_ROLES.map((role) => (
+                        <SelectItem key={role.id} value={role.id}>
+                          {role.name}
+                        </SelectItem>
+                      ))} */}
                     </SelectContent>
                   </Select>
                 </div>

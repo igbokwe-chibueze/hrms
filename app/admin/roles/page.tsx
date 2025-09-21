@@ -1,3 +1,4 @@
+// admin/roles/page.tsx
 "use client"
 
 import { useState } from "react"
@@ -504,7 +505,7 @@ export default function RolesManagement() {
 
       {/* Role Creation/Edit Dialog */}
       <Dialog open={isRoleDialogOpen} onOpenChange={setIsRoleDialogOpen}>
-        <DialogContent className="w-[95vw] max-w-6xl h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
+        <DialogContent className="w-[95vw] max-w-6xl h-[90vh] flex flex-col p-0 gap-0 overflow-scroll">
           <DialogHeader className="px-6 py-4 border-b flex-shrink-0">
             <DialogTitle className="text-lg sm:text-xl">
               {editingRole ? `Edit Role: ${editingRole.name}` : "Create New Role"}
