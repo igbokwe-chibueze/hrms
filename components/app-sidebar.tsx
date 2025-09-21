@@ -20,17 +20,11 @@ import {
   DollarSign,
   TrendingUp,
   Settings,
-  Bell,
-  Search,
-  Menu,
   Shield,
   Building,
   UserPlus,
   CreditCard,
   BarChart3,
-  LogOut,
-  User,
-  X,
 } from "lucide-react"
 import { OrganizationSwitcher } from "./organization-switcher"
 
