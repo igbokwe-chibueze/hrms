@@ -38,14 +38,19 @@ export default function RolesManagement() {
     description: "",
     permissions: [] as string[],
   })
-  const [newAttribute, setNewAttribute] = useState({
+
+  const EMPTY_ATTRIBUTE: Attribute = {
+    id: "",
     name: "",
-    type: "text" as const,
-    options: [] as string[],
+    type: "text",
+    options: [],
     required: false,
     category: "",
-  })
+  }
 
+  // initial attribute state
+  const [newAttribute, setNewAttribute] = useState<Attribute>(EMPTY_ATTRIBUTE)
+  
   // Bulk selection state and handlers
   const [selectedRoles, setSelectedRoles] = useState<string[]>([])
   const [isBulkPermissionDialogOpen, setIsBulkPermissionDialogOpen] = useState(false)
@@ -107,7 +112,8 @@ export default function RolesManagement() {
     }
 
     setAttributes([...attributes, attribute])
-    setNewAttribute({ name: "", type: "text", options: [], required: false, category: "" })
+    // reset attribute state
+    setNewAttribute(EMPTY_ATTRIBUTE)
     setIsAttributeDialogOpen(false)
   }
 
@@ -141,7 +147,8 @@ export default function RolesManagement() {
     if (attribute) {
       setEditingAttribute({ ...attribute })
     } else {
-      setNewAttribute({ name: "", type: "text", options: [], required: false, category: "" })
+      // reset attribute state
+      setNewAttribute(EMPTY_ATTRIBUTE)
       setEditingAttribute(null)
     }
     setIsAttributeDialogOpen(true)
@@ -676,15 +683,28 @@ export default function RolesManagement() {
                   <Label htmlFor="attributeType" className="text-sm font-medium">
                     Type
                   </Label>
-                  <Select
+                  {/* <Select
                     value={editingAttribute ? editingAttribute.type : newAttribute.type}
                     onValueChange={(value) => {
-                      const type = value as any
+                      const type = value as Attribute["type"]
                       editingAttribute
                         ? setEditingAttribute({ ...editingAttribute, type })
                         : setNewAttribute({ ...newAttribute, type })
                     }}
+                  > */}
+                  <Select
+                    value={editingAttribute ? editingAttribute.type : newAttribute.type}
+                    onValueChange={(value) => {
+                      const type = value as Attribute["type"]
+
+                      if (editingAttribute) {
+                        setEditingAttribute({ ...editingAttribute, type })
+                      } else {
+                        setNewAttribute({ ...newAttribute, type })
+                      }
+                    }}
                   >
+
                     <SelectTrigger className="w-full">
                       <SelectValue />
                     </SelectTrigger>
@@ -722,16 +742,19 @@ export default function RolesManagement() {
                   <Label className="text-sm font-medium">Options (comma-separated)</Label>
                   <Input
                     value={
-                      editingAttribute ? editingAttribute.options?.join(", ") || "" : newAttribute.options.join(", ")
+                      editingAttribute ? editingAttribute.options?.join(", ") || "" : newAttribute.options?.join(", ")
                     }
                     onChange={(e) => {
                       const options = e.target.value
                         .split(",")
                         .map((s) => s.trim())
                         .filter(Boolean)
-                      editingAttribute
-                        ? setEditingAttribute({ ...editingAttribute, options })
-                        : setNewAttribute({ ...newAttribute, options })
+
+                      if (editingAttribute) {
+                        setEditingAttribute({ ...editingAttribute, options })
+                      } else {
+                        setNewAttribute({ ...newAttribute, options })
+                      }
                     }}
                     placeholder="Option 1, Option 2, Option 3"
                     className="w-full"
