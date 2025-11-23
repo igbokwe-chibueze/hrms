@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { getCurrentUser } from "@/lib/dummy-data"
 import { SidebarTrigger } from "./ui/sidebar"
 import { Badge } from "./ui/badge"
+import { ThemeToggle } from "./theme-toggle"
 
 
 export const Header = () => {
@@ -14,7 +15,7 @@ export const Header = () => {
   return (
     <>
         {/* Top navigation */}
-        <header className="bg-white shadow-sm border-b">
+        <header className="shadow-sm border-b">
             <div className="flex items-center justify-between px-4 py-3">
                 <div className="flex items-center">
                     <SidebarTrigger/>
@@ -32,6 +33,9 @@ export const Header = () => {
                 </div>
 
                 <div className="flex items-center space-x-4">
+
+                    <ThemeToggle/>
+
                     <Button variant="ghost" size="sm">
                         <Bell className="h-5 w-5" />
                     </Button>
